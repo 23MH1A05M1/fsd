@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Budget Calendar Tracker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #e3f2fd, #ffffff);
+      color: #333;
+      padding: 20px;
+    }
+
+    header {
+      background-color: #0d6efd;
+      color: white;
+      text-align: center;
+      padding: 25px 10px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    header h1 {
+      font-size: 32px;
+      margin-bottom: 5px;
+    }
+
+    .calendar-container {
+      max-width: 1000px;
+      margin: 30px auto;
+      background: #ffffff;
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+    }
+
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+    }
+
+    .calendar-header button {
+      background: #0d6efd;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 15px;
+      transition: background 0.3s;
+    }
+
+    .calendar-header button:hover {
+      background: #084cd4;
+    }
+
+    .calendar-header h2 {
+      font-size: 24px;
+      flex-grow: 1;
+      text-align: center;
+      color: #0d6efd;
+    }
+
+    .calendar {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 12px;
+    }
+
+    .day {
+      background-color: #f8f9fa;
+      border: 2px solid #e3e3e3;
+      border-radius: 12px;
+      height: 100px;
+      text-align: center;
+      padding: 10px 0;
+      font-weight: bold;
+      font-size: 18px;
+      cursor: pointer;
+      position: relative;
+      transition: background 0.3s;
+    }
+
+    .low {
+      background-color: #d4edda;
+    }
+
+    .moderate {
+      background-color: #fff3cd;
+    }
+
+    .high {
+      background-color: #f8d7da;
+    }
+
+    /* MODAL CARD STYLING */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0,0,0,0.5);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .modal-content {
+      background: #fff;
+      padding: 30px;
+      width: 350px;
+      border-radius: 16px;
+      position: relative;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .modal-content h3 {
+      color: #0d6efd;
+      margin-bottom: 15px;
+      font-size: 22px;
+    }
+
+    .modal-content p {
+      font-size: 16px;
+      margin: 8px 0;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      background: #eee;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 50%;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 14px;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>📅 Budget Calendar Tracker</h1>
+  <p>Click any date to view spending details</p>
+</header>
+
+<div class="calendar-container">
+  <div class="calendar-header">
+    <button onclick="changeMonth(-1)">« Prev</button>
+    <h2 id="monthYear">Month Year</h2>
+    <button onclick="changeMonth(1)">Next »</button>
+  </div>
+
+  <div class="calendar" id="calendar"></div>
+</div>
+
+<!-- MODAL CARD -->
+<div class="modal" id="spendingModal">
+  <div class="modal-content">
+    <button class="close-btn" onclick="closeModal()">✖</button>
+    <h3 id="modalDate">Spending on Date</h3>
+    <div id="modalDetails"></div>
+  </div>
+</div>
+
+<div class="footer">© 2025 BudgetBuddy</div>
+
+<script>
+  const monthNames = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+
+  let currentDate = new Date();
+  let currentMonth = currentDate.getMonth();
+  let currentYear = currentDate.getFullYear();
+
+  const spendingData = {
+    "2025-07-2": [
+      { category: "Food", amount: 150 },
+      { category: "Bills", amount: 250 }
+    ],
+    "2025-07-5": [
+      { category: "Groceries", amount: 320 }
+    ],
+    "2025-07-10": [
+      { category: "Travel", amount: 1200 },
+      { category: "Hotel", amount: 800 }
+    ],
+    "2025-08-3": [
+      { category: "Travel", amount: 800 }
+    ]
+  };
+
+  function generateCalendar(month, year) {
+    const calendar = document.getElementById("calendar");
+    calendar.innerHTML = "";
+    document.getElementById("monthYear").textContent = `${monthNames[month]} ${year}`;
+
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    for (let i = 0; i < firstDay; i++) {
+      const empty = document.createElement("div");
+      calendar.appendChild(empty);
+    }
+
+    for (let day = 1; day <= daysInMonth; day++) {
+      const dayDiv = document.createElement("div");
+      dayDiv.classList.add("day");
+      dayDiv.textContent = day;
+
+      const key = `${year}-${String(month + 1).padStart(2, '0')}-${day}`;
+      const spending = spendingData[key];
+      let total = 0;
+
+      if (spending) {
+        spending.forEach(item => total += item.amount);
+        if (total >= 1000) dayDiv.classList.add("high");
+        else if (total >= 500) dayDiv.classList.add("moderate");
+        else dayDiv.classList.add("low");
+      }
+
+      dayDiv.addEventListener("click", () => {
+        const modal = document.getElementById("spendingModal");
+        const modalDate = document.getElementById("modalDate");
+        const modalDetails = document.getElementById("modalDetails");
+        modalDate.textContent = `Spending on ${monthNames[month]} ${day}, ${year}`;
+
+        if (spending) {
+          modalDetails.innerHTML = spending.map(item =>
+            `<p>💸 ${item.category}: ₹${item.amount}</p>`
+          ).join('');
+          modalDetails.innerHTML += `<hr><p><strong>Total: ₹${total}</strong></p>`;
+        } else {
+          modalDetails.innerHTML = `<p>No spending recorded.</p>`;
+        }
+
+        modal.style.display = "flex";
+      });
+
+      calendar.appendChild(dayDiv);
+    }
+  }
+
+  function closeModal() {
+    document.getElementById("spendingModal").style.display = "none";
+  }
+
+  window.onclick = function(e) {
+    const modal = document.getElementById("spendingModal");
+    if (e.target === modal) modal.style.display = "none";
+  }
+
+  function changeMonth(offset) {
+    currentMonth += offset;
+    if (currentMonth < 0) {
+      currentMonth = 11;
+      currentYear--;
+    } else if (currentMonth > 11) {
+      currentMonth = 0;
+      currentYear++;
+    }
+    generateCalendar(currentMonth, currentYear);
+  }
+
+  generateCalendar(currentMonth, currentYear);
+</script>
+
+</body>
+</html>

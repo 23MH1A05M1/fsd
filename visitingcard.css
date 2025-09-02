@@ -1,0 +1,105 @@
+.cbackground{
+    width: 100%;
+    height:100%;
+    background-color: black;
+}
+/* .round{
+    width: 40px;
+    height: 40px;
+    border: 1px solid red;
+    border-radius: 100%;
+} */
+.background{
+     /* width :500px;
+    height: 300px; */
+     /* border: 1px solid yellow; */
+   /* background-color: yellow;  */
+    /* background-image: linear-gradient(to top right white,yellow); */
+     width: 500px;
+    height: 350px;
+    border: 1px solid white;
+    position: fixed;
+    background-image: linear-gradient(to top left,#2193b0,white); 
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px 0px white;
+    top: 200px;
+    left: 200px;
+}
+.image{
+     width: 150px;
+    height:150px;
+    /* <img src="../IMAGES/mypic.jpg"> */
+    border: 5px solid lightblue;
+    background-image:url(../IMAGES/mypic.jpg);
+    position: relative;
+    background-size: cover;
+    border-radius: 100%;
+    box-shadow: 0px 0px 10px 0px lightblue;
+    top: 15px;
+    left: 15px;
+
+}
+.name{
+    font-family: Montserrat;
+    position: relative;
+    /* color: antiquewhite; */
+    left: 25px;
+    top:15px;
+}
+.profesion{
+    font-family:Playfair Display ;
+    position: relative;
+    left: 30px;
+    top:20px;
+}
+/* .line{
+    width:100px;
+    /* height:20px; 
+    border:1px solid red;
+    left:50px;
+} */
+ .phone{
+    position: absolute;
+    left:290px;
+    top:70px;
+ } 
+ .mail{
+    position: absolute;
+    left:290px;
+    top:110px;
+ }
+ .linkedin{
+    position: absolute;
+    left:290px;
+    top:140px;
+ }
+ .insta{
+    position: absolute;
+    left:290px;
+    top:170px;
+ }
+ .graduation{
+    position: absolute;
+    left:290px;
+    top:200px;
+ }
+ .location{
+    position: absolute;
+    left:290px;
+    top:230px;
+ }
+ .github{
+    position: absolute;
+    left:290;
+    top:270;
+ }
+ .facebook{
+     position: absolute;
+    left:320;
+    top:270;
+ }
+ .twitter{
+    position: absolute;
+    left:350;
+    top:270;
+ }

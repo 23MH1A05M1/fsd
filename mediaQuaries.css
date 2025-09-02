@@ -1,0 +1,17 @@
+.demo{
+    width:200px;
+    height:200px;
+    background-color: red;
+}
+/* @media(max-width:768px){
+    .demo{
+        background-color: blue;
+    }
+
+} */
+  @media(min-width:500px) and (max-width:600px){
+    .demo{
+        background-color: blue;
+    }
+
+} 

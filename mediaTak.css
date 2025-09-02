@@ -1,0 +1,46 @@
+body{
+    background-color: antiquewhite;
+}
+
+.header{
+    width:100%;
+    height:80px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    position:fixed;
+    justify-content: space-between;
+}
+.list{
+    position: relative;
+    right:25%;
+}
+.icons{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+}
+.icon{
+    padding: 20px;
+}
+.login {
+    padding: 16px;
+    color: white;
+    background-color: green;
+    border-radius: 10%;
+    margin-right: 2%;
+
+}
+.menubar{
+    display: none;
+    position: absolute;
+    right: 2PX;
+}
+@media (max-width:1024px){
+    .list{
+        display: none;
+    }
+    .menubar{
+        display: block;
+    }
+}

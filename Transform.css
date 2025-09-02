@@ -1,0 +1,16 @@
+.transformx{
+    width:100px;
+    height:100px;
+    background-color: red;
+    transform:translatex(100px);
+    /* transform:translatex(-50px) */
+    /* transform:translateZ(50px) */
+}
+.transformy{
+     width:100px;
+    height:100px;
+    background-color: green;
+    /* transform:translatey(50px); */
+    /* transform:translateY(-50px); */
+    transform:translate(50px,50px)
+}

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Budget Goal Tracker</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      height: 100vh;
+      display: flex;
+    }
+
+    .side {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.5s ease;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .left {
+      background: #cceeff;
+    }
+
+    .right {
+      background: #e5ccff;
+    }
+
+    .label {
+      font-size: 28px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    /* Fullscreen popup card */
+    .popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      display: none;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 100;
+    }
+
+    .popup.active {
+      display: flex;
+    }
+
+    .popup-content {
+      margin: auto;
+      width: 80%;
+      height: 80%;
+      background: white;
+      border-radius: 15px;
+      display: flex;
+      overflow: hidden;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .popup .section {
+      flex: 1;
+      padding: 30px;
+    }
+
+    .popup .left-section {
+      background: #f1f8ff;
+      border-right: 2px solid #ccc;
+    }
+
+    .popup .right-section {
+      background: #f9f5ff;
+    }
+
+    .popup h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .popup p {
+      font-size: 18px;
+      margin: 15px 0;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 20px;
+      background: #ddd;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 20px 0;
+    }
+
+    .progress {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(to right, #00c6ff, #0072ff);
+      transition: width 0.5s ease;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 28px;
+      color: white;
+      cursor: pointer;
+      z-index: 101;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Left Side - Monthly -->
+  <div class="side left" onclick="showPopup('monthly')">
+    <div class="label">📅 Monthly Goal</div>
+  </div>
+
+  <!-- Right Side - Annual -->
+  <div class="side right" onclick="showPopup('annual')">
+    <div class="label">📈 Annual Goal</div>
+  </div>
+
+  <!-- Fullscreen Popup -->
+  <div class="popup" id="goalPopup">
+    <div class="close-btn" onclick="closePopup()">×</div>
+    <div class="popup-content">
+      <!-- Left side of popup -->
+      <div class="section left-section" id="goalInfo">
+        <!-- Filled by JS -->
+      </div>
+
+      <!-- Right side of popup -->
+      <div class="section right-section" id="savedInfo">
+        <!-- Filled by JS -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showPopup(type) {
+      const popup = document.getElementById("goalPopup");
+      const goalInfo = document.getElementById("goalInfo");
+      const savedInfo = document.getElementById("savedInfo");
+
+      let goalTitle, target, saved;
+
+      if (type === "monthly") {
+        goalTitle = "Save ₹5000 This Month";
+        target = 5000;
+        saved = 3500;
+      } else {
+        goalTitle = "Save ₹60,000 This Year";
+        target = 60000;
+        saved = 30000;
+      }
+
+      let percent = Math.min((saved / target) * 100, 100);
+      let remaining = target - saved;
+
+      // Left side content
+      goalInfo.innerHTML = `
+        <h2>🎯 Goal Info</h2>
+        <p><strong>Goal:</strong> ${goalTitle}</p>
+        <p><strong>Target Amount:</strong> ₹${target}</p>
+      `;
+
+      // Right side content
+      savedInfo.innerHTML = `
+        <h2>💰 Progress</h2>
+        <p><strong>Saved So Far:</strong> ₹${saved}</p>
+        <div class="progress-bar">
+          <div class="progress" style="width: ${percent}%"></div>
+        </div>
+        <p><strong>Progress:</strong> ${percent.toFixed(1)}%</p>
+        <p><strong>Remaining:</strong> ₹${remaining}</p>
+      `;
+
+      popup.classList.add("active");
+    }
+
+    function closePopup() {
+      document.getElementById("goalPopup").classList.remove("active");
+    }
+  </script>
+
+</body>
+</html>

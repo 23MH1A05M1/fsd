@@ -1,0 +1,43 @@
+ .linear{
+    width:200px;
+    height:200px;
+    background-image: linear-gradient(red,blue);
+    background-image:linear-gradient(pink,green,yellow);
+   
+} 
+.lineartop{
+    width:100px;
+    height:100px;
+    background-image: linear-gradient(to top, violet,blue,skyblue,green,yellow,orange,red);
+}
+.linearleft
+{
+    width: 100px;
+    height: 100px;
+    background-image: linear-gradient(to left,red,green,blue);
+}
+.linearright
+{
+    width: 100px;
+    height: 100px;
+    background-image: linear-gradient(to right,red,green,blue);
+}
+.lineartopright
+{
+    width: 100px;
+    height: 100px;
+    background-image: linear-gradient(to top right,red,green,blue);
+}
+.linearbottomleft
+{
+    width: 100px;
+    height: 100px;
+    background-image: linear-gradient(to bottom left,red,green,blue);
+}
+ .radial{
+     width:100px;
+    height:100px;
+    background-image: radial-gradient(red, yellow,green);
+     /* border: 2px solid orange;
+  */
+} 
