@@ -1,0 +1,19 @@
+<html>
+    <head>
+
+    </head>
+    <script>
+        function fun(Gender){
+            console.log(Gender,"selected");
+        }
+    </script>
+    <body>
+     <!-- <button onclick="fun()"></button> -->
+      <form>
+        <lable>Male</lable>
+        <input type="radio" required onchange = "fun('male')" name="Gender"/>
+        <lable>Female</lable>
+        <input type="radio" required onchange="fun('Female')" name="Gender"/>
+      </form>
+    </body>
+</html>

@@ -1,0 +1,47 @@
+body{
+    display: flex;
+    background-color: #E4B7A0;
+}
+.menu{
+    padding: 10px;
+    position: absolute;
+    left: -240px;
+    top:0px;
+    width:200px;
+    height:100svh;
+    border:2px solid black;
+    display: flex;
+    flex-direction: column;
+     align-items: end; 
+     cursor: pointer;
+     background-color:#C38370;
+     transition: left 0.5s linear;
+}
+.menu div{
+    width:100%;
+    padding: 20px 5px;
+    font-size: 24px;
+    border-bottom: 1px solid black;
+    border-radius: 20px;
+}
+.menu div:hover{
+
+    background-color: #F0CCB0;
+    /* box-shadow:0px,0px,10px,black; */
+}
+span{
+    font-size: 40px;
+    padding: 20px;
+    width:fit-content;
+    /* border: 1px solid black; */
+    
+}
+.menusym{
+    width: 30px;
+    height:30px;
+    border:1px solid black;
+}
+div{
+    font-size: 20px;
+    cursor: pointer;
+}

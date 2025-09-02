@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <title>MenuBar</title>
+        <link rel="stylesheet" href="menu_task.css"/>
+    </head>
+    <body>
+        
+        <div onclick="menus()">&#9776;</div>
+       
+        <div class="menu">
+        <span onclick="cross()">&times;</span>
+        <div>Home</div>
+        <div>Profile</div>
+        <div>About</div>
+        <div>Contact</div>
+        <div>Edit</div>
+        <div>Logout</div>
+        </div>
+    </body>
+    <script>
+     function cross(){
+        document.getElementsByClassName("menu")[0].style = "left:-240px;"
+     }
+     function menus(){
+        document.getElementsByClassName("menu")[0].style="left:0px;"
+     }
+    </script>
+</html>

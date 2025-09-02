@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <script>
+            let arr=[30,40,50,80,35]
+            let total=0;
+            let avg=0;
+
+            arr.map(ele =>{
+                 if(ele <30)
+                  {
+                    document.write("fail");
+                  }
+                 else if(ele >=30 && avg >=30)
+                  {
+                    document.write("pass");
+                  }})
+            arr.map(ele=>{
+                    total+=ele;
+                    avg=(total)*100/500;
+                 })
+                  document.write(avg);
+                    // console.log(avg);
+                    if(avg >=30)
+                   {
+                      document.write("Qualified");
+                   }
+                   else{
+                    document.write("Not Qualified")
+                   }
+            
+        </script>
+    </head>
+</html>

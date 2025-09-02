@@ -1,0 +1,50 @@
+body{
+    display:flex;
+    gap:20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: black; */
+}
+.layout{
+    c
+}
+.display{
+    width: 300px;
+    height:110px;
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+.colon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 100px;
+    width:50px;
+    height:100px;
+    color: black;
+    /* border:2px solid black; */
+}
+.minutes{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    width:100px;
+    height:100px;
+    /* border:2px solid black; */
+}
+.seconds{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    width:100px;
+    height:100px;
+    /* border:2px solid black; */
+}
+.minutes,.seconds{
+    font-size: 100px;
+    color:black;
+}
